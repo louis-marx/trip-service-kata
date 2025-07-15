@@ -14,18 +14,19 @@ Imagine a social networking website for travellers:
 ## Exercise Rules
 
 ---
-- Our job is to write tests for the legacy code until we have 100% coverage.
+- Our job is to write tests for the TripService class until we have 100% coverage
 - Once we have 100% coverage, we need to refactor and make the code better.
-- At the end of the refactoring, both tests and production code should clearly describe the business rules.
+- At the end of the refactoring, both tests and production code should clearly describe the business rules
 
 ## Exercise Constraints
 
 ---
-- We cannot manually change production code that is not covered by tests. That means:
-  - We cannot refactor logic unless it is covered by tests.
-- If we need to change a function (or introduce a class/service) in order to make it testable, you can do so using automated refactorings via your IDE.
-- We CANNOT change the public interface of the main trip-related function(s):
-  - We cannot change function signatures (input parameters, output values, etc.).
-  - Such changes might break other code using these functions, which is not desirable right now.
-- We CANNOT introduce state (i.e., global or class-level mutable variables) to the trip-related logic.
-  - The code is intended to be stateless. Introducing state may cause issues, especially in concurrent scenarios.
+- We cannot manually change production code if not covered by tests, that means:
+  - We cannot refactor the TripService class logic while still not covered by tests
+- If we need to change the TripService class in order to test, you can do so using automated refactorings (via IDE)
+- We CANNOT change the public interface of TripService, that means:
+  - We cannot change its constructor
+  - We cannot change the method signature
+  - Both changes above might cause other classes to change, which is not desirable now
+- We CANNOT introduce state in the TripService
+  - TripService is stateless. Introducing state may cause multi-thread issues

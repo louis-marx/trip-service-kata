@@ -21,41 +21,50 @@ class User:
         self.trips = []
         self.friends = []
 
-    def addFriend(self, user):
+    def add_friend(self, user):
         self.friends.append(user)
 
-    def addTrip(self, trip):
+    def add_trip(self, trip):
         self.trips.append(trip)
 
-    def getFriends(self):
+    def get_friends(self):
         return self.friends
+
 #
-# Functions
+# Dependencies
 #
-def _isUserLoggedIn(user):
+def _is_user_logged_in(user: User):
     raise DependendClassCallDuringUnitTestException(
         "_isUserLoggedIn() should not be called in an unit test"
     )
 
-def _getLoggedUser():
+def _get_logged_user():
     raise DependendClassCallDuringUnitTestException(
         "_getLoggedUser() should not be called in an unit test"
     )
 
-def _findTripsByUser(user):
+def _find_trips_by_user(user: User):
     raise DependendClassCallDuringUnitTestException(
         "_findTripsByUser() should not be invoked on an unit test."
     )
 
-def getTripsByUser(user):
-    loggedUser = _getLoggedUser()
-    if loggedUser:
-        if loggedUser in user.getFriends():
-            return _findTripsByUser(user)
+#
+# TripService Class
+#
+class TripService:
+    def get_trips_by_user(self, user: User):
+        logged_user = self.get_logged_user()
+        if logged_user:
+            if logged_user in user.get_friends():
+                return _find_trips_by_user(user)
+            else:
+                return []
         else:
-            return []
-    else:
-        raise UserNotLoggedInException()
+            raise UserNotLoggedInException()
+
+    def get_logged_user(self):
+        return _get_logged_user()
+
 
 if __name__ == "__main__":
     pass
